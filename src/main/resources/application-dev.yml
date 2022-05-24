@@ -1,0 +1,22 @@
+server:
+  port: 8090
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 改成自己的数据库
+    url: jdbc:mysql://192.168.56.30:3306/public_welfare_activity_management_system?serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+  mvc:
+    pathmatch:
+      # 解决springboot2.6.x与swagger3冲突
+      matching-strategy: ant_path_matcher
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
