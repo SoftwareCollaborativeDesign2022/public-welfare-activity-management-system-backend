@@ -2,6 +2,7 @@ package org.saikumo.pwams.constant;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 
 @AllArgsConstructor
 @Getter

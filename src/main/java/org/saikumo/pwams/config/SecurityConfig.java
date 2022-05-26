@@ -1,5 +1,6 @@
 package org.saikumo.pwams.config;
 
+import org.saikumo.pwams.constant.RoleName;
 import org.saikumo.pwams.security.filter.JwtAuthenticationTokenFilter;
 import org.saikumo.pwams.security.handler.RestAuthenticationEntryPoint;
 import org.saikumo.pwams.security.handler.RestfulAccessDeniedHandler;
@@ -41,6 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests()
 				.antMatchers("/api/auth/**").permitAll()
+				.antMatchers("/test/**").hasAuthority(RoleName.STUDENT.getRoleName())
 				.anyRequest().authenticated()
 				.and()
 				.exceptionHandling()
