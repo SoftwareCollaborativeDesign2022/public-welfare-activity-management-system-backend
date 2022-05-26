@@ -18,12 +18,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
-	public RestAuthenticationEntryPoint restAuthenticationEntryPoint(){
+	public RestAuthenticationEntryPoint restAuthenticationEntryPoint() {
 		return new RestAuthenticationEntryPoint();
 	}
 
 	@Bean
-	public RestfulAccessDeniedHandler restfulAccessDeniedHandler(){
+	public RestfulAccessDeniedHandler restfulAccessDeniedHandler() {
 		return new RestfulAccessDeniedHandler();
 	}
 
@@ -34,14 +34,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	@Bean
-	public AuthenticationManager authenticationManagerBean() throws Exception{
+	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests()
+				//配置 权限控制规则
 				.antMatchers("/api/auth/**").permitAll()
+				.antMatchers("/doc.html", "/doc.html/**", "/webjars/**", "/v3/**", "/v2/**", "/swagger-resources",
+						"/swagger-resources/**", "/swagger-ui.html", "/swagger-ui.html/**").permitAll()
 				.antMatchers("/test/**").hasAuthority(RoleName.STUDENT.getRoleName())
 				.anyRequest().authenticated()
 				.and()
@@ -49,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.accessDeniedHandler(restfulAccessDeniedHandler())
 				.authenticationEntryPoint(restAuthenticationEntryPoint())
 				.and()
-				.addFilterBefore(jwtAuthenticationTokenFilter(),UsernamePasswordAuthenticationFilter.class)
+				.addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class)
 				.cors()
 				.and()
 				.csrf().disable()

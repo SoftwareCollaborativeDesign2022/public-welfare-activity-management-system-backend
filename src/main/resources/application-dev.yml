@@ -20,3 +20,10 @@ spring:
         show_sql: true
         format_sql: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
+
+# Swagger配置
+swagger:
+  enable: true
+  application-name: public-welfare-activity-management-system-backend
+  application-version: 2022.05.26
+  application-description: 公益活动管理系统
