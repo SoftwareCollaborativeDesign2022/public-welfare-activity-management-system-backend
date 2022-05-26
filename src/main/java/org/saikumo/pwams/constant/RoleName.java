@@ -8,11 +8,12 @@ import lombok.ToString;
 @Getter
 public enum RoleName {
 
-	STUDENT("学员"),
-	MENTOR("导师"),
-	ACTIVITY_ORGANIZER("活动组织者"),
-	STAFF_MEMBER("工作人员"),
-	MANAGER("经理");
+	STUDENT(1L,"学员"),
+	MENTOR(2L,"导师"),
+	ACTIVITY_ORGANIZER(3L,"活动组织者"),
+	STAFF_MEMBER(4L,"工作人员"),
+	MANAGER(5L,"经理");
 
+	private final Long id;
 	private final String roleName;
 }

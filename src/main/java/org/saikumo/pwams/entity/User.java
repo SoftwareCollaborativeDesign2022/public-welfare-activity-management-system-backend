@@ -32,7 +32,7 @@ public class User implements UserDetails {
 
 	private boolean enabled;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private List<Role> roles;
 
 	@Override

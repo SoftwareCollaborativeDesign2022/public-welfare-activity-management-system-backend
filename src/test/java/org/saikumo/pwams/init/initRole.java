@@ -22,10 +22,15 @@ public class initRole {
 			roleList.add(new Role());
 		}
 		roleList.get(0).setName(RoleName.STUDENT.getRoleName());
+		roleList.get(0).setId(RoleName.STUDENT.getId());
 		roleList.get(1).setName(RoleName.MENTOR.getRoleName());
+		roleList.get(1).setId(RoleName.MENTOR.getId());
 		roleList.get(2).setName(RoleName.ACTIVITY_ORGANIZER.getRoleName());
+		roleList.get(2).setId(RoleName.ACTIVITY_ORGANIZER.getId());
 		roleList.get(3).setName(RoleName.STAFF_MEMBER.getRoleName());
+		roleList.get(3).setId(RoleName.STAFF_MEMBER.getId());
 		roleList.get(4).setName(RoleName.MANAGER.getRoleName());
+		roleList.get(4).setId(RoleName.MANAGER.getId());
 
 		roleRepository.saveAllAndFlush(roleList);
 	}
