@@ -24,6 +24,6 @@ public class Activity {
 
 	private String status;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private List<User> users;
 }
