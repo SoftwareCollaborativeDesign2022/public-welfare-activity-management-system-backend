@@ -1,5 +1,7 @@
 package org.saikumo.pwams.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.saikumo.pwams.dto.ApiResult;
 import org.saikumo.pwams.dto.ChangePasswordRequest;
 import org.saikumo.pwams.entity.Role;
@@ -18,10 +20,12 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/user")
+@Api(tags = "用户接口")
 public class UserController {
 	@Autowired
 	UserService userService;
 
+	@ApiOperation("修改密码")
 	@PostMapping("/changepassword")
 	public ApiResult changePassword(Authentication authentication, @RequestBody ChangePasswordRequest changePasswordRequest) {
 		return userService.changePassword(authentication, changePasswordRequest.getOldPassword()
