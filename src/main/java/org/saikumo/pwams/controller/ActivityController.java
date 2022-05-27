@@ -66,8 +66,13 @@ public class ActivityController {
     @ApiOperation("查看报名学员")
     @PostMapping("/enrollUser")
     public List<User> enrollUser(Long id){
-        Activity activity = activityRepository.findById(id);
-        return activity.getUsers();
+        try{
+            Activity activity = activityRepository.findById(id);
+            return activity.getUsers();
+        }catch (Exception e){
+            return null;
+        }
+
     }
 
     @ApiOperation("活动申请")
