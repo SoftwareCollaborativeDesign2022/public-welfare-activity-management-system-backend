@@ -1,6 +1,7 @@
 package org.saikumo.pwams.controller;
 
 import io.swagger.annotations.ApiOperation;
+import org.saikumo.pwams.dto.ApiResult;
 import org.saikumo.pwams.entity.Activity;
 import org.saikumo.pwams.entity.User;
 import org.saikumo.pwams.repository.ActivityRepository;
@@ -41,25 +42,26 @@ public class ActivityController {
 
     @ApiOperation("报名")
     @PostMapping("/enroll")
-    public String enroll(Long id,Long uid){
+    public ApiResult enroll(Long id,String username){
         try {
             Activity act = activityRepository.findById(id);
-            User user = userRepository.findById(uid).get();
+            User user = userRepository.findUserByUsername(username);
+            if(user==null) return ApiResult.fail("未找到该用户");
             List<User> u = act.getUsers();
             for(int i=0;i<u.size();i++){
-                if(u.get(i).getId()==uid){
-                    return "已报名";
+                if(u.get(i).getUsername().equals(username)){
+                    return ApiResult.fail("已报名");
                 }
             }
             u.add(user);
             Activity result = activityRepository.save(act);
             if (result != null) {
-                return "success";
+                return ApiResult.ok("报名成功");
             } else {
-                return "false";
+                return ApiResult.fail("失败");
             }
         }catch (Exception e){
-            return "false";
+            return ApiResult.fail("400");
         }
     }
 
@@ -77,7 +79,7 @@ public class ActivityController {
 
     @ApiOperation("活动申请")
     @PostMapping("/createAct")
-    public String createAct(String desc,Long menetorId ,String name) {
+    public ApiResult createAct(String desc,Long menetorId ,String name) {
         try {
             Activity activity = new Activity();
             activity.setDescription(desc);
@@ -86,12 +88,12 @@ public class ActivityController {
             activity.setStatus("未审核");
             Activity result = activityRepository.save(activity);
             if (result != null) {
-                return "success";
+                return ApiResult.ok();
             } else {
-                return "false";
+                return ApiResult.fail("失败");
             }
         }catch (Exception e){
-            return "false";
+            return ApiResult.fail("400");
         }
 
     }
@@ -104,18 +106,18 @@ public class ActivityController {
 
     @ApiOperation("工作人员活动通过审核")
     @PostMapping("/staffPass")
-    public String staffPass(Long id) {
+    public ApiResult staffPass(Long id) {
         try {
             Activity activity = activityRepository.findById(id);
             activity.setStatus("通过工作人员审核");
             Activity result = activityRepository.save(activity);
             if (result != null) {
-                return "success";
+                return ApiResult.ok();
             } else {
-                return "false";
+                return ApiResult.fail("失败");
             }
         }catch (Exception e){
-            return "false";
+            return ApiResult.fail("400");
         }
     }
 
@@ -127,18 +129,18 @@ public class ActivityController {
 
     @ApiOperation("经理活动通过审核")
     @PostMapping("/managerPass")
-    public String managerPass(Long id) {
+    public ApiResult managerPass(Long id) {
         try {
             Activity activity = activityRepository.findById(id);
             activity.setStatus("通过");
             Activity result = activityRepository.save(activity);
             if (result != null) {
-                return "success";
+                return ApiResult.ok();
             } else {
-                return "false";
+                return ApiResult.fail("失败");
             }
         }catch (Exception e){
-            return "false";
+            return ApiResult.fail("400");
         }
     }
 }
