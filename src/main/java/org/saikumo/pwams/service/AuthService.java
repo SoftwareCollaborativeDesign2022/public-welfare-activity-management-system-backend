@@ -56,6 +56,9 @@ public class AuthService {
 		User userDetail = (User) authentication.getPrincipal();
 		// 放入缓存
 		caffeineCache.put(CacheName.USER, userDetail.getUsername(), userDetail);
+
+		accessToken.setAuthorities(userDetail.getAuthorities());
+
 		return ApiResult.ok(accessToken);
 	}
 
