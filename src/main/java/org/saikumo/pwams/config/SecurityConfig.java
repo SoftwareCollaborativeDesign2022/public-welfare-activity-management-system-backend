@@ -43,10 +43,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeHttpRequests()
 				//配置 权限控制规则
                 .antMatchers("/api/activity/enroll","/api/activity/userFind","/api/activity/getDesc").hasAuthority(RoleName.STUDENT.getRoleName())
-                .antMatchers("/api/activity/**").hasAuthority(RoleName.MENTOR.getRoleName())
-                .antMatchers("/api/activity/**").hasAuthority(RoleName.ACTIVITY_ORGANIZER.getRoleName())
-                .antMatchers("/api/activity/**").hasAuthority(RoleName.MANAGER.getRoleName())
-                .antMatchers("/api/activity/**").hasAuthority(RoleName.STAFF_MEMBER.getRoleName())
+                .antMatchers("/api/activity/**").hasAnyAuthority(RoleName.MENTOR.getRoleName(),RoleName.ACTIVITY_ORGANIZER.getRoleName(),RoleName.MANAGER.getRoleName(),RoleName.STAFF_MEMBER.getRoleName())
+//                .antMatchers("/api/activity/**").hasAuthority(RoleName.ACTIVITY_ORGANIZER.getRoleName())
+//                .antMatchers("/api/activity/**").hasAuthority(RoleName.MANAGER.getRoleName())
+//                .antMatchers("/api/activity/**").hasAuthority(RoleName.STAFF_MEMBER.getRoleName())
                 .antMatchers("/api/auth/**").permitAll()
 				.antMatchers("/doc.html", "/doc.html/**", "/webjars/**", "/v3/**", "/v2/**", "/swagger-resources",
 						"/swagger-resources/**", "/swagger-ui.html", "/swagger-ui.html/**").permitAll()
