@@ -40,6 +40,18 @@ public class ActivityController {
         return activityRepository.findById(id);
     }
 
+    @ApiOperation("获得导师名")
+    @PostMapping("/getMentorName")
+    public String getMentorName(Long id){//活动id
+        try{Activity activity = activityRepository.findById(id);
+        Long tid = activity.getMentorId();
+        User user = userRepository.findById(tid).get();
+        return user.getUsername();
+        }catch (Exception e){
+            return null;
+        }
+    }
+
     @ApiOperation("报名")
     @PostMapping("/enroll")
     public ApiResult enroll(Long id,String username){
@@ -95,7 +107,6 @@ public class ActivityController {
         }catch (Exception e){
             return ApiResult.fail("400");
         }
-
     }
 
     @ApiOperation("工作人员活动审核")
