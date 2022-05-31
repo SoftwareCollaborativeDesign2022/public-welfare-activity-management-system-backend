@@ -3,6 +3,7 @@ package org.saikumo.pwams.controller;
 import io.swagger.annotations.ApiOperation;
 import org.saikumo.pwams.dto.ApiResult;
 import org.saikumo.pwams.entity.Activity;
+import org.saikumo.pwams.entity.Role;
 import org.saikumo.pwams.entity.User;
 import org.saikumo.pwams.repository.ActivityRepository;
 import org.saikumo.pwams.repository.UserRepository;
@@ -74,6 +75,19 @@ public class ActivityController {
             }
         }catch (Exception e){
             return ApiResult.fail("400");
+        }
+    }
+
+    @ApiOperation("获取导师名单")
+    @PostMapping("/getMentor")
+    public List<User> getMentor(){
+        try {
+            Long l = new Long(2);
+            Role m = new Role(l,"Mentor");
+            List<User> user = userRepository.findByRoles(m);
+            return user;
+        }catch (Exception e){
+            return null;
         }
     }
 
