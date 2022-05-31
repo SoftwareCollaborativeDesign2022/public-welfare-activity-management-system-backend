@@ -32,9 +32,6 @@ public class User implements UserDetails {
 
 	private boolean enabled;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	private List<File> files;
-
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private List<Role> roles;
 
