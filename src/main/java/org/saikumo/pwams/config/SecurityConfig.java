@@ -45,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/api/activity/enroll", "/api/activity/userFind", "/api/activity/getDesc").hasAnyAuthority(RoleName.STUDENT.getRoleName(),RoleName.MENTOR.getRoleName(), RoleName.ACTIVITY_ORGANIZER.getRoleName(), RoleName.MANAGER.getRoleName(), RoleName.STAFF_MEMBER.getRoleName())
 				.antMatchers("/api/activity/**").hasAnyAuthority(RoleName.MENTOR.getRoleName(), RoleName.ACTIVITY_ORGANIZER.getRoleName(), RoleName.MANAGER.getRoleName(), RoleName.STAFF_MEMBER.getRoleName())
 				.antMatchers("/api/file/**").hasAnyAuthority(RoleName.STUDENT.getRoleName(), RoleName.MENTOR.getRoleName(), RoleName.ACTIVITY_ORGANIZER.getRoleName(), RoleName.MANAGER.getRoleName(), RoleName.STAFF_MEMBER.getRoleName())
+				.antMatchers("/api/manager/**").hasAuthority(RoleName.MANAGER.getRoleName())
 				.antMatchers("/api/auth/**").permitAll()
 				.antMatchers("/doc.html", "/doc.html/**", "/webjars/**", "/v3/**", "/v2/**", "/swagger-resources",
 						"/swagger-resources/**", "/swagger-ui.html", "/swagger-ui.html/**").permitAll()

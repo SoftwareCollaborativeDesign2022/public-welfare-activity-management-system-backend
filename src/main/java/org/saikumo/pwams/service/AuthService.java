@@ -62,7 +62,7 @@ public class AuthService {
 		return ApiResult.ok(accessToken);
 	}
 
-	public ApiResult register(String loginAccount, String password) {
+	public ApiResult register(String loginAccount, String password,String roleName) {
 		User user = userRepository.findUserByUsername(loginAccount);
 		//用户名存在
 		if(!ObjectUtils.isEmpty(user)){
@@ -78,7 +78,7 @@ public class AuthService {
 		user.setPassword(passwordEncoder.encode(password));
 		List<Role> roleList = new ArrayList<>();
 		Role role = new Role();
-		role.setName(RoleName.STUDENT.getRoleName());
+		role.setName(roleName);
 		role.setId(RoleName.STUDENT.getId());
 		roleList.add(role);
 		user.setRoles(roleList);
