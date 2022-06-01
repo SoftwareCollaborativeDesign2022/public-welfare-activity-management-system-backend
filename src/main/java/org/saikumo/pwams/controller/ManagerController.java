@@ -24,6 +24,6 @@ public class ManagerController {
 	@PostMapping("/register_staff")
 	public ApiResult registerStaff(@Valid @RequestBody RegisterStaffRequest registerStaffRequest) {
 		return authService.register(registerStaffRequest.getLoginAccount(), registerStaffRequest.getPassword()
-				, RoleName.STAFF_MEMBER.getRoleName());
+				, registerStaffRequest.getRoleName());
 	}
 }
