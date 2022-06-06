@@ -53,6 +53,16 @@ public class ActivityController {
         }
     }
 
+    @ApiOperation("根据导师获取活动")
+    @PostMapping("/getActivityByMentor")
+    public List<Activity> getActivityByMentor(Long MentorId){//活动id
+        try{List<Activity> activity = activityRepository.findByMentorIdAndStatus(MentorId,"通过");
+            return activity;
+        }catch (Exception e){
+            return null;
+        }
+    }
+
     @ApiOperation("报名")
     @PostMapping("/enroll")
     public ApiResult enroll(Long id,String username){
