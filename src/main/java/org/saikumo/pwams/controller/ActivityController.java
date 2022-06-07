@@ -53,10 +53,23 @@ public class ActivityController {
         }
     }
 
-    @ApiOperation("根据导师获取活动")
+    @ApiOperation("根据导师Id获取活动")
     @PostMapping("/getActivityByMentor")
-    public List<Activity> getActivityByMentor(Long MentorId){//活动id
+    public List<Activity> getActivityByMentor(Long MentorId){//导师ID
         try{List<Activity> activity = activityRepository.findByMentorIdAndStatus(MentorId,"通过");
+            return activity;
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    @ApiOperation("根据导师username获取活动")
+    @PostMapping("/getActivityByMentorname")
+    public List<Activity> getActivityByMentorname(String Mentorname){//导师名
+        try{
+            User mentor = userRepository.findUserByUsername(Mentorname);
+            Long MentorId = mentor.getId();
+            List<Activity> activity = activityRepository.findByMentorIdAndStatus(MentorId,"通过");
             return activity;
         }catch (Exception e){
             return null;
