@@ -79,7 +79,20 @@ public class AuthService {
 		List<Role> roleList = new ArrayList<>();
 		Role role = new Role();
 		role.setName(roleName);
-		role.setId(RoleName.STUDENT.getId());
+		//判断角色
+		if(roleName.equals(RoleName.ACTIVITY_ORGANIZER.getRoleName())){
+			role.setId(RoleName.ACTIVITY_ORGANIZER.getId());
+		}else if(roleName.equals(RoleName.STAFF_MEMBER.getRoleName())){
+			role.setId(RoleName.STAFF_MEMBER.getId());
+		}else if(roleName.equals(RoleName.MANAGER.getRoleName())){
+			role.setId(RoleName.MANAGER.getId());
+		}else if(roleName.equals(RoleName.STUDENT.getRoleName())){
+			role.setId(RoleName.STUDENT.getId());
+		}else if(roleName.equals(RoleName.MENTOR.getRoleName())){
+			role.setId(RoleName.MENTOR.getId());
+		} else{
+			return ApiResult.fail("角色错误");
+		}
 		roleList.add(role);
 		user.setRoles(roleList);
 		userRepository.save(user);
